@@ -18,6 +18,7 @@ export {
   UnknownMethodError,
 } from "./errors.js";
 export {
+  AbstractClassifier,
   ArithmeticProgressionClassifier,
   CustomBreaksClassifier,
   CkmeansClassifier,

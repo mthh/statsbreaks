@@ -614,6 +614,7 @@ class CkmeansClassifier extends AbstractClassifier {
 }
 
 export {
+  AbstractClassifier,
   ArithmeticProgressionClassifier,
   CkmeansClassifier,
   CustomBreaksClassifier,
