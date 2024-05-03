@@ -9,6 +9,7 @@ export { geometricProgression } from "./method-geometric-progression";
 export { arithmeticProgression } from "./method-arithmetic-progression";
 export { pretty } from "./method-pretty";
 export { nestedMeans } from "./method-nested-means";
+export { ckmeans } from "./method-ckmeans";
 export {
   InvalidNumberOfClassesError,
   InvalidPrecisionError,
@@ -19,6 +20,7 @@ export {
 export {
   ArithmeticProgressionClassifier,
   CustomBreaksClassifier,
+  CkmeansClassifier,
   EqualClassifier,
   GeometricProgressionClassifier,
   HeadTailClassifier,

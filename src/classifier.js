@@ -13,7 +13,9 @@ import { headtail } from "./method-headtail";
 import { pretty } from "./method-pretty";
 import { arithmeticProgression } from './method-arithmetic-progression';
 import { nestedMeans } from './method-nested-means';
+import { ckmeans } from './method-ckmeans';
 import { validatePrecisionParameter } from './helpers/parameter-validation';
+import { filterConvert } from './helpers/filter';
 
 class AbstractClassifier {
   constructor(values, precision) {
@@ -22,7 +24,7 @@ class AbstractClassifier {
         'Abstract class "AbstractClassifier" cannot be instantiated directly.'
       );
     }
-    this._values = values;
+    this._values = values ? filterConvert(values) : values;
     this.precision = validatePrecisionParameter(precision);
     this.type = null;
     this.nClasses = null;
@@ -49,7 +51,7 @@ class AbstractClassifier {
    * Changing manually the series should reset the computed values.
    */
   set values(values) {
-    this._values = values;
+    this._values = filterConvert(values);
     this._min = null;
     this._max = null;
     this._mean = null;
@@ -275,7 +277,7 @@ class QuantileClassifier extends AbstractClassifier {
    */
   constructor(values, precision) {
     super(values, precision);
-    this.type = "jenks";
+    this.type = "quantile";
   }
 
   /**
@@ -589,8 +591,31 @@ class ArithmeticProgressionClassifier extends AbstractClassifier {
   }
 }
 
+class CkmeansClassifier extends AbstractClassifier {
+  constructor(values, precision) {
+    super(values, precision);
+    this.type = "ckmeans";
+  }
+
+  /**
+   * Classify the series into the given number of classes.
+   *
+   * @param {number} nClasses - The number of classes to classify the series into.
+   * @returns {number[]}
+   * @throws {TooFewValuesError}
+   */
+  classify(nClasses) {
+    this.breaks = ckmeans(this._values, {
+      nb: nClasses,
+      precision: this.precision,
+    });
+    return this._breaks;
+  }
+}
+
 export {
   ArithmeticProgressionClassifier,
+  CkmeansClassifier,
   CustomBreaksClassifier,
   EqualClassifier,
   GeometricProgressionClassifier,
