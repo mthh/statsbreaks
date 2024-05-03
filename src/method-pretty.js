@@ -31,7 +31,7 @@ function prettyNumber(x, rounded = true) {
       nf = 10.0;
     }
   }
-  return nf * 10.0**exp;
+  return nf * Math.pow(10, exp);
 }
 
 /**
