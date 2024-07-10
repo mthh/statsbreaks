@@ -57,7 +57,7 @@ export function msd(data, options = {}) {
       i = i + sd * k;
     }
     i = avg - sd * k;
-    while (i > min) {
+    while (i > mn) {
       breaks.push(i);
       i = i - sd * k;
     }
