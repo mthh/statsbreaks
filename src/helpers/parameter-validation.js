@@ -60,7 +60,23 @@ function validatePrecisionParameter(precision) {
   return precision;
 }
 
+
+/**
+ * Validate the interval closure parameter and return it if it is valid.
+ * @param {any} intervalClosure
+ * @returns {string}
+ */
+function validateIntervalClosure(intervalClosure) {
+  if (
+    typeof intervalClosure !== 'string'
+    || (intervalClosure.toLowerCase() !== 'right' && intervalClosure.toLowerCase() !== 'left')) {
+    throw new Error('Invalid interval closure parameter, must be "left" or "right"');
+  }
+  return intervalClosure.toLowerCase();
+}
+
 export {
+  validateIntervalClosure,
   validateNbParameter,
   validatePrecisionParameter,
 };

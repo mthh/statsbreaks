@@ -14,11 +14,11 @@ import { pretty } from "./method-pretty";
 import { arithmeticProgression } from './method-arithmetic-progression';
 import { nestedMeans } from './method-nested-means';
 import { ckmeans } from './method-ckmeans';
-import { validatePrecisionParameter } from './helpers/parameter-validation';
+import { validateIntervalClosure, validatePrecisionParameter } from './helpers/parameter-validation';
 import { filterConvert } from './helpers/filter';
 
 class AbstractClassifier {
-  constructor(values, precision) {
+  constructor(values, precision, intervalClosure='right') {
     if (this.constructor === AbstractClassifier) {
       throw new TypeError(
         'Abstract class "AbstractClassifier" cannot be instantiated directly.'
@@ -26,6 +26,7 @@ class AbstractClassifier {
     }
     this._values = values ? filterConvert(values) : values;
     this.precision = validatePrecisionParameter(precision);
+    this._intervalClosure = validateIntervalClosure(intervalClosure);
     this.type = null;
     this.nClasses = null;
     this._breaks = null;
@@ -45,6 +46,13 @@ class AbstractClassifier {
    */
   get values() {
     return this._values;
+  }
+
+  /**
+   * Get the current interval closure value
+   */
+  get intervalClosure() {
+    return this._intervalClosure;
   }
 
   /**
@@ -159,7 +167,6 @@ class AbstractClassifier {
 
   /**
    * Get the counts of the series by class.
-   *
    * @returns {number[]}
    */
   countByClass() {
@@ -182,7 +189,6 @@ class AbstractClassifier {
 
   /**
    * Split the series by class.
-   *
    * @returns {number[][]}
    */
   splitByClass() {
@@ -193,9 +199,16 @@ class AbstractClassifier {
     }
     if (this._splitValues === null) {
       const sortedValues = this._values.slice().sort((a, b) => a - b);
-      this._splitValues = this._breaks.slice(1)
-        .map((d, i) => sortedValues
-          .filter((v) => v <= d && v > (i === 0 ? -Infinity : this._breaks[i])));
+      if (this._intervalClosure === 'right') {
+        this._splitValues = this._breaks.slice(1)
+          .map((d, i) => sortedValues
+            .filter((v) => v <= d && v > (i === 0 ? -Infinity : this._breaks[i])));
+      } else {
+        this._splitValues = this._breaks.slice(1)
+          .map((d, i) => sortedValues
+            .filter((v) => v < (i === this.nClasses - 1 ? Infinity : d)
+              && v >= (i === 0 ? -Infinity : this._breaks[i])));
+      }
     }
     return this._splitValues;
   }
@@ -211,12 +224,21 @@ class AbstractClassifier {
         'Breaks are not set, please call the "classify" method first'
       );
     }
-    for (let i = 0, breaksLength = this._breaks.length; i < breaksLength; i++) {
-      if (value <= this._breaks[i + 1]) {
-        return i;
+    if (this._intervalClosure === 'right') {
+      for (let i = 0, breaksLength = this._breaks.length; i < breaksLength; i++) {
+        if (value <= this._breaks[i + 1]) {
+          return i;
+        }
       }
+      return this.nClasses - 1;
+    } else { // this._intervalClosure === 'left'
+      for (let i = 0, breaksLength = this._breaks.length; i < breaksLength; i++) {
+        if (value < this._breaks[i + 1]) {
+          return i;
+        }
+      }
+      return this.nClasses - 1;
     }
-    return this.nClasses;
   }
 
   /**
@@ -240,10 +262,11 @@ class JenksClassifier extends AbstractClassifier {
    *
    * @param {number[]} values
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision) {
-    super(values, precision);
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "jenks";
   }
 
@@ -273,10 +296,11 @@ class QuantileClassifier extends AbstractClassifier {
    *
    * @param {number[]} values
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision) {
-    super(values, precision);
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "quantile";
   }
 
@@ -306,10 +330,11 @@ class EqualClassifier extends AbstractClassifier {
    *
    * @param {number[]} values
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision) {
-    super(values, precision);
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "equal";
   }
 
@@ -339,10 +364,11 @@ class GeometricProgressionClassifier extends AbstractClassifier {
    *
    * @param {number[]} values
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision) {
-    super(values, precision);
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "geometric";
   }
 
@@ -373,10 +399,11 @@ class Q6Classifier extends AbstractClassifier {
    *
    * @param {number[]} values
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision) {
-    super(values, precision);
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "q6";
   }
 
@@ -403,10 +430,11 @@ class CustomBreaksClassifier extends AbstractClassifier {
    * @param {number[]} values
    * @param {number[]} breaks - The break values to use.
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision, breaks) {
-    super(values, precision);
+  constructor(values, precision, breaks, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "custom";
     if (breaks) {
       this.breaks = breaks;
@@ -420,7 +448,12 @@ class CustomBreaksClassifier extends AbstractClassifier {
    * @returns {number[]}
    */
   classify(breaks) {
-    this.breaks = breaks;
+    if (!breaks && !this._breaks) {
+      throw new Error('No breaks provided');
+    }
+    if (breaks) {
+      this.breaks = breaks;
+    }
     return this._breaks;
   }
 }
@@ -435,10 +468,11 @@ class MsdClassifier extends AbstractClassifier {
    *
    * @param {number[]} values
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision) {
-    super(values, precision);
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "msd";
   }
 
@@ -469,10 +503,11 @@ class HeadTailClassifier extends AbstractClassifier {
    *
    * @param {number[]} values
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision) {
-    super(values, precision);
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "headtail";
   }
 
@@ -501,10 +536,11 @@ class PrettyBreaksClassifier extends AbstractClassifier {
    *
    * @param {number[]} values
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision) {
-    super(values, precision);
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "pretty";
   }
 
@@ -534,10 +570,11 @@ class NestedMeansClassifier extends AbstractClassifier {
    *
    * @param {number[]} values
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision) {
-    super(values, precision)
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = 'nested-means';
   }
 
@@ -568,10 +605,11 @@ class ArithmeticProgressionClassifier extends AbstractClassifier {
    *
    * @param {number[]} values
    * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision) {
-    super(values, precision);
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "arithmetic";
   }
 
@@ -592,8 +630,16 @@ class ArithmeticProgressionClassifier extends AbstractClassifier {
 }
 
 class CkmeansClassifier extends AbstractClassifier {
-  constructor(values, precision) {
-    super(values, precision);
+  /**
+   * Create a classifier using "CKmeans" classification method.
+   *
+   * @param {number[]} values
+   * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
+   * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
+   */
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
     this.type = "ckmeans";
   }
 
