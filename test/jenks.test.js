@@ -5,7 +5,8 @@ const statsbreaks = require("../dist/index.min.js");
 test("jenks", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const breaks = statsbreaks.breaks(X, { method: 'jenks', nb: 5 });
-    t.same(breaks, [0.13, 75.29, 192.05, 370.50, 722.85, 4111.45]);
+    // t.same(breaks, [0.13, 75.29, 192.05, 370.50, 722.85, 4111.45]);
+    t.same(breaks, [0.13, 93.02, 228.49, 546.68, 2417.15, 4111.45]);
     t.end();
   });
 
@@ -22,7 +23,8 @@ test("JenksClassifier", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const d = new statsbreaks.JenksClassifier(X);
     const breaks = d.classify(5);
-    t.same(breaks, [0.13, 75.29, 192.05, 370.50, 722.85, 4111.45]);
+    // t.same(breaks, [0.13, 75.29, 192.05, 370.50, 722.85, 4111.45]);
+    t.same(breaks, [0.13, 93.02, 228.49, 546.68, 2417.15, 4111.45]);
     t.end();
   });
 

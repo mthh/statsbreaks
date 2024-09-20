@@ -1,5 +1,6 @@
 const test = require("tap").test;
 const statsbreaks = require("../dist/index.min.js");
+const X2 = require("./test-data.js");
 
 // This reference dataset is coming from https://github.com/urschrei/ckmeans/blob/main/src/lib.rs
 const X = [
@@ -272,6 +273,49 @@ test("CkmeansClassifier", function (t) {
     const breaks = d.classify(3);
     // Breaks values are coming from https://github.com/urschrei/ckmeans/blob/main/src/lib.rs
     t.same(breaks, [0.68, 2.43, 3.5, 4.34]);
+    t.end();
+  });
+
+  t.end();
+});
+
+test('CkmeansClassifier', function (t) {
+  t.test('should return same classification as jenks for the test data', function (t) {
+    const dj = new statsbreaks.JenksClassifier(X2);
+    const breaksJenks = dj.classify(5);
+    t.same(breaksJenks, [0.13, 93.02, 228.49, 546.68, 2417.15, 4111.45]);
+
+    const dc = new statsbreaks.CkmeansClassifier(X2);
+    const breaksCkmeans = dc.classify(5);
+    t.same(breaksCkmeans, [0.13, 93.02, 228.49, 546.68, 2417.15, 4111.45]);
+    t.end();
+  });
+
+  t.test('should return same count by class as jenks for the test data (1)', function (t) {
+    const dj = new statsbreaks.JenksClassifier(X2);
+    const breaksJenks = dj.classify(5);
+    const countJenks = dj.countByClass();
+
+    const dc = new statsbreaks.CkmeansClassifier(X2);
+    const breaksCkmeans = dc.classify(5);
+    const countCkmeans = dc.countByClass();
+
+    t.same(countJenks, countCkmeans);
+
+    t.end();
+  });
+
+  t.test('should return same count by class as jenks for the test data (1)', function (t) {
+    const dj = new statsbreaks.JenksClassifier(X);
+    const breaksJenks = dj.classify(4);
+    const countJenks = dj.countByClass();
+
+    const dc = new statsbreaks.CkmeansClassifier(X);
+    const breaksCkmeans = dc.classify(4);
+    const countCkmeans = dc.countByClass();
+
+    t.same(countJenks, countCkmeans);
+
     t.end();
   });
 

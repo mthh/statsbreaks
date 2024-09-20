@@ -18,6 +18,29 @@ function breaks(data, lower_class_limits, n_classes) {
   return kclass;
 }
 
+/**
+ * Compute the jenks natural breaks from the given data and lower class limits
+ * matrix. Contrary to the original breaks code, we don't return the class limit
+ * that falls on a data point, but a nicer class limit that falls between two data points
+ * (as we do for the ckmeans method).
+ * @param data
+ * @param lowerClassLimits
+ * @param nClasses
+ */
+function breaks2(data, lowerClassLimits, nClasses) {
+  const kclass = [];
+  let m = data.length;
+  let j, jj;
+  kclass[nClasses] = data[data.length - 1];
+  kclass[0] = data[0];
+  for (j = 1; j < nClasses; j++) {
+    jj = nClasses - j + 1;
+    kclass[jj - 1] = (data[lowerClassLimits[m - 1][jj - 1] - 2] + data[lowerClassLimits[m - 1][jj - 1] - 1]) / 2;
+    m = lowerClassLimits[m - 1][jj - 1] - 1;
+  }
+  return kclass;
+}
+
 function getMatrices(data, n_classes) {
   const lower_class_limits = [],
     variance_combinations = [],
@@ -123,7 +146,7 @@ export function jenks(data, options = {}) {
   if (nb > unique.length) throw new TooFewValuesError('Too few unique values for the given number of breaks');
   let matrices = getMatrices(data, nb);
   let lower_class_limits = matrices.lower_class_limits;
-  let result = breaks(data, lower_class_limits, nb);
+  let result = breaks2(data, lower_class_limits, nb);
 
   if (precision !== null) {
     result = roundarray(result, precision);
