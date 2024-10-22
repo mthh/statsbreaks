@@ -133,6 +133,14 @@ The **`nestedmeans`**  method computes breaks using nested means : a first (arit
 breaks(data, {method: "nestedmeans", nb: 8, precision: 2 })
 ~~~
 
+### `s5`
+
+The **`s5`** method is a variation of the *mean and standard deviation (msd)* method with 5 classes.
+
+~~~js
+breaks(data, {method: "s5", precision: 2 })
+~~~
+
 ## 3. Object-oriented API
 
 For each classification method, you can also use an object-oriented API.

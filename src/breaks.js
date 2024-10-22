@@ -1,4 +1,5 @@
 import { q6 } from "./method-q6.js";
+import { s5 } from "./method-s5.js";
 import { quantile } from "./method-quantile.js";
 import { equal } from "./method-equal.js";
 import { jenks } from "./method-jenks.js";
@@ -65,6 +66,9 @@ export function breaks(data, options = {}) {
       break;
     case "ckmeans":
       breaks = ckmeans(data, options);
+      break;
+    case "s5":
+      breaks = s5(data, options);
       break;
     default:
       throw new UnknownMethodError();

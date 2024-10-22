@@ -7,6 +7,7 @@ import { quantile } from "./method-quantile";
 import { jenks } from "./method-jenks";
 import { equal } from "./method-equal";
 import { q6 } from "./method-q6";
+import { s5 } from "./method-s5.js";
 import { msd } from "./method-msd";
 import { geometricProgression } from "./method-geometric-progression";
 import { headtail } from "./method-headtail";
@@ -659,6 +660,31 @@ class CkmeansClassifier extends AbstractClassifier {
   }
 }
 
+class S5Classifier extends AbstractClassifier {
+  /**
+   * Create a classifier using "S5" classification method.
+   *
+   * @param {number[]} values
+   * @param precision
+   * @param {'left' | 'right'} intervalClosure - The interval closure to use.
+   * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
+   */
+  constructor(values, precision, intervalClosure = 'right') {
+    super(values, precision, intervalClosure);
+    this.type = "s5";
+  }
+
+  /**
+   * Classify the series into the given number of classes.
+   * @returns {number[]}
+   * @throws {TooFewValuesError}
+   */
+  classify() {
+    this.breaks = s5(this._values, {precision: this.precision});
+    return this._breaks;
+  }
+}
+
 export {
   AbstractClassifier,
   ArithmeticProgressionClassifier,
@@ -673,4 +699,5 @@ export {
   PrettyBreaksClassifier,
   QuantileClassifier,
   Q6Classifier,
+  S5Classifier,
 };

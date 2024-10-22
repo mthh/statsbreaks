@@ -31,4 +31,5 @@ export {
   PrettyBreaksClassifier,
   QuantileClassifier,
   Q6Classifier,
+  S5Classifier,
 } from "./classifier";
