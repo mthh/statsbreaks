@@ -125,12 +125,12 @@ The **`pretty`**  method generates breaks that are equally spaced round values w
 breaks(data, {method: "pretty", nb: 5, precision: 2 })
 ~~~
 
-#### `nested`
+#### `nestedmeans`
 
-The **`nested`**  method computes breaks using nested means : a first (arithmetic) mean divides the series in two, then each group is again split by its mean, and so on, until the desired number of classes is obtained. As such, the number of classes requested must be a power of 2 (2, 4, 8, etc.).
+The **`nestedmeans`**  method computes breaks using nested means : a first (arithmetic) mean divides the series in two, then each group is again split by its mean, and so on, until the desired number of classes is obtained. As such, the number of classes requested must be a power of 2 (2, 4, 8, etc.).
 
 ~~~js
-breaks(data, {method: "nested", nb: 8, precision: 2 })
+breaks(data, {method: "nestedmeans", nb: 8, precision: 2 })
 ~~~
 
 ## 3. Object-oriented API
