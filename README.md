@@ -45,7 +45,7 @@ The **`breaks()`** function allows to compute breaks according to several discre
 
 Parameters
 
-- <b>`method`</b>: method of discretization. "quantile", "q6", "equal", "msd", "jenks", "geometric", "headtail" or "pretty" (default: "quantile")
+- <b>`method`</b>: method of discretization. "quantile", "q6", "equal", "msd", "s5", "ckmeans", "jenks", "geometric", "headtail" or "pretty" (default: "quantile")
 - <b>`nb`</b>: number of classes (default: 5)
 - <b>`precision`</b>: rounding of values. 2 transform 35667.877876 to 35667.87 -2 transform 35667.877876 to 35600. Set it to `null` to indicate breaks shouldn't be rounded (default: 2)
 - <b>`minmax`</b>: a boolean to keep or remove min and max values (default: true)
