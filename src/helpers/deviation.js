@@ -5,7 +5,7 @@ import { mean } from "./mean.js";
 function variance(x) {
   let v = x.filter((d) => isNumber(d)).map((a) => +a);
   let m = mean(v);
-  return sum(v.map((d) => Math.pow((d - m), 2))) / (v.length - 1);
+  return sum(v.map((d) => Math.pow((d - m), 2))) / v.length;
 }
 
 export function deviation(x) {
