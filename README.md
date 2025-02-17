@@ -76,6 +76,25 @@ The **`Jenks`** method is an automatic classification method based on the princi
 breaks(data, {method: "jenks", nb: 5, precision: 2 })
 ~~~
 
+Note that many implementations (which was our case until recently) return class boundaries that fall on data-points.
+We've chosen to change this to return “pretty” class boundaries that fall halfway between two data-points.
+This doesn't change the way the values are classified, and generally gives a better understanding of class boundaries.
+
+#### `ckmeans`
+
+The **`ckmeans`** method provides a deterministic and optimal *k*-means clustering for one-dimensional data.
+
+~~~js
+breaks(data, {method: "ckmeans", nb: 5, precision: 2 })
+~~~
+
+Because it addresses the same problem as Jenks' algorithm, this method generally gives exactly the same results as Jenks, but in a much shorter time.
+As such, we recommend using *ckmeans* for cases where you would have needed the canonical *Jenks* method.
+
+Note that this method returns class boundaries that fall halfway between two data-points (which one reason for why we chose to do the same for Jenks).
+
+Also, take a look at the following notebook, which discusses the concept of *natural breaks* and compares these two methods: https://observablehq.com/@visionscarto/natural-breaks.
+
 #### `equal`
 
 The **`equal`** method is constructed by dividing up the extent of a statistical series (max - min) into the desired number of classes. This method is used even or symmetrical distributions. It should be avoided for strongly skewed distributions. This method does not enable the comparisons of several maps.
@@ -145,15 +164,25 @@ breaks(data, {method: "s5", precision: 2 })
 
 For each classification method, you can also use an object-oriented API.
 
-Classes available are: `JenksClassifier`, `EqualClassifier`, `GeometricProgressionClassifier`, `HeadTailClassifier`, `MsdClassifier`, `PrettyBreaksClassifier`, `QuantileClassifier`, `Q6Classifier`, `ArithmeticProgressionClassifier`, `NestedMeansClassifier` and `CustomBreaksClassifier`.
+Classes available are: `CkmeansClassifier`, `JenksClassifier`, `EqualClassifier`,
+`GeometricProgressionClassifier`, `HeadTailClassifier`, `MsdClassifier`, `PrettyBreaksClassifier`,
+`QuantileClassifier`, `Q6Classifier`, `S5Classifier`, `ArithmeticProgressionClassifier`,
+`NestedMeansClassifier` and `CustomBreaksClassifier`.
   
 For example
 
 ~~~js
-series = new discr.JenksClassifier(data, 2)
+series = new discr.CkmeansClassifier(data, 2)
 ~~~
 
 where data is an array of values and 2 the precision.
+
+Note that you can choose type of interval closure (defaults to `right`) by using the third argument of the constructor. Possible values are `left` and `right`:
+
+- Right closure means that the class boundaries are closed on the right, i.e. the class boundaries are `[min, b1[, [b1, b2[, ..., [bn, max]`.
+- Left closure means that the class boundaries are closed on the left, i.e. the class boundaries are `[min, b1], ]b1, b2], ..., ]bn, max]`.
+
+Once instantiated, you can use the following methods:
 
 **`classify`** computes the break values for the given number of classes and returns it.
 
