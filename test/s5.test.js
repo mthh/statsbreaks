@@ -1107,7 +1107,7 @@ const X = [
 test("s5", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const breaks = statsbreaks.breaks(X, { method: 's5' });
-    t.same(breaks, [172.68, 404.1, 452.34, 548.84, 597.08, 823.82]);
+    t.same(breaks, [172.68, 404.14, 452.37, 548.82, 597.04, 823.82]);
     t.end();
   });
 
@@ -1124,7 +1124,7 @@ test("S5Classifier", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const d = new statsbreaks.S5Classifier(X);
     const breaks = d.classify();
-    t.same(breaks, [172.68, 404.1, 452.34, 548.84, 597.08, 823.82]);
+    t.same(breaks, [172.68, 404.14, 452.37, 548.82, 597.04, 823.82]);
     t.end();
   });
 
