@@ -429,12 +429,12 @@ class CustomBreaksClassifier extends AbstractClassifier {
    * Create a classifier using custom (user defined) breaks.
    *
    * @param {number[]} values
-   * @param {number[]} breaks - The break values to use.
    * @param precision
    * @param {'left' | 'right'} intervalClosure - The interval closure to use.
+   * @param {number[]} breaks - The break values to use.
    * @throws {InvalidPrecisionError} - If the precision is not valid (not null, not an integer or less than 0).
    */
-  constructor(values, precision, breaks, intervalClosure = 'right') {
+  constructor(values, precision, intervalClosure = 'right',  breaks) {
     super(values, precision, intervalClosure);
     this.type = "custom";
     if (breaks) {

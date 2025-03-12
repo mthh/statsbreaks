@@ -11,6 +11,7 @@ test("Classifiers", function (t) {
     const d1 = new statsbreaks.CustomBreaksClassifier(
       X, // values
       null, // precision
+      'right', // right closed / default
       [0, 100], // breaks
     );
     const groups1 = d1.splitByClass();
@@ -21,6 +22,7 @@ test("Classifiers", function (t) {
     const d2 = new statsbreaks.CustomBreaksClassifier(
       X, // values
       null, // precision
+      'right', // right closed / default
       [10, 90], // breaks
     );
     const groups = d2.splitByClass();
@@ -34,6 +36,7 @@ test("Classifiers", function (t) {
     const d1 = new statsbreaks.CustomBreaksClassifier(
       X, // values
       null, // precision
+      'right', // right closed / default
       [10, 30, 60, 90], // breaks
     );
     const groups1 = d1.splitByClass();
@@ -46,6 +49,7 @@ test("Classifiers", function (t) {
     const d2 = new statsbreaks.CustomBreaksClassifier(
       X, // values
       null, // precision
+      'right', // right closed / default
       [10, 50, 90], // breaks
     );
     const groups2 = d2.splitByClass();

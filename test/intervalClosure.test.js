@@ -7,9 +7,11 @@ test('Classifier with right closed intervals', function (t) {
     const d0 = new statsbreaks.CustomBreaksClassifier(
       X, // values
       null, // precision
-      [1, 7, 14, 19, 25], // breaks
       // No value for the closure parameter, default is right
+      // No value for breaks, we are providing them later
     );
+    d0.classify([1, 7, 14, 19, 25]);
+
     const split0 = d0.splitByClass();
     const count0 = d0.countByClass();
     t.same(count0, [4, 3, 3, 3]);
@@ -23,8 +25,8 @@ test('Classifier with right closed intervals', function (t) {
     const d1 = new statsbreaks.CustomBreaksClassifier(
       X, // values
       null, // precision
+      'right', // right closed / default
       [1, 7, 14, 19, 25], // breaks
-      'right' // right closed / default
     );
     const split1 = d1.splitByClass();
     const count1 = d1.countByClass();
@@ -40,8 +42,8 @@ test('Classifier with left closed intervals', function (t) {
     const d0 = new statsbreaks.CustomBreaksClassifier(
       X, // values
       null, // precision
+      'left', // Left closed
       [1, 7, 14, 19, 25], // breaks
-      'left' // Left closed
     );
     const split0 = d0.splitByClass();
     const count0 = d0.countByClass();
