@@ -179,8 +179,8 @@ where data is an array of values and 2 the precision.
 
 Note that you can choose type of interval closure (defaults to `right`) by using the third argument of the constructor. Possible values are `left` and `right`:
 
-- Right closure means that the class boundaries are closed on the right, i.e. the class boundaries are `[min, b1[, [b1, b2[, ..., [bn, max]`.
-- Left closure means that the class boundaries are closed on the left, i.e. the class boundaries are `[min, b1], ]b1, b2], ..., ]bn, max]`.
+- Right closure means that the class boundaries are closed on the right, i.e. the class boundaries are `[min, b1], ]b1, b2], ..., ]bn, max]`.
+- Left closure means that the class boundaries are closed on the left, i.e. the class boundaries are `[min, b1[, [b1, b2[, ..., [bn, max]`.
 
 Once instantiated, you can use the following methods:
 
