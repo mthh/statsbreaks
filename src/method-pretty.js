@@ -1,10 +1,10 @@
-import { isNumber } from './helpers/is-number';
-import { roundarray } from './helpers/rounding';
-import { min } from './helpers/min';
-import { max } from './helpers/max';
-import { arange } from './helpers/arange';
-import { TooFewValuesError } from './errors';
-import {validateNbParameter, validatePrecisionParameter} from './helpers/parameter-validation';
+import { isNumber } from './helpers/is-number.js';
+import { roundarray } from './helpers/rounding.js';
+import { min } from './helpers/min.js';
+import { max } from './helpers/max.js';
+import { arange } from './helpers/arange.js';
+import { TooFewValuesError } from './errors.js';
+import {validateNbParameter, validatePrecisionParameter} from './helpers/parameter-validation.js';
 
 function prettyNumber(x, rounded = true) {
   let exp = Math.floor(Math.log10(x));

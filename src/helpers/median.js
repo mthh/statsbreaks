@@ -1,4 +1,4 @@
-import { isNumber } from './is-number';
+import { isNumber } from './is-number.js';
 
 /**
  * Median of the values of an array

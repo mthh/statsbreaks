@@ -1,9 +1,9 @@
-import { isNumber } from "./helpers/is-number";
-import { min } from "./helpers/min";
-import { max } from "./helpers/max";
-import { roundarray } from "./helpers/rounding";
-import { TooFewValuesError } from "./errors";
-import {validateNbParameter, validatePrecisionParameter} from './helpers/parameter-validation';
+import { isNumber } from "./helpers/is-number.js";
+import { min } from "./helpers/min.js";
+import { max } from "./helpers/max.js";
+import { roundarray } from "./helpers/rounding.js";
+import { TooFewValuesError } from "./errors.js";
+import {validateNbParameter, validatePrecisionParameter} from './helpers/parameter-validation.js';
 
 /**
  * Arithmetic progression

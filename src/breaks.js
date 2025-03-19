@@ -7,9 +7,9 @@ import { msd } from "./method-msd.js";
 import { geometricProgression } from "./method-geometric-progression.js";
 import { arithmeticProgression } from "./method-arithmetic-progression.js";
 import { headtail } from "./method-headtail.js";
-import { pretty } from "./method-pretty";
-import { nestedMeans } from "./method-nested-means";
-import { ckmeans } from './method-ckmeans';
+import { pretty } from "./method-pretty.js";
+import { nestedMeans } from "./method-nested-means.js";
+import { ckmeans } from './method-ckmeans.js';
 import { UnknownMethodError } from "./errors.js";
 
 /**

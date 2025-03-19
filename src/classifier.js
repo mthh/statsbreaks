@@ -1,22 +1,22 @@
-import { min } from "./helpers/min";
-import { max } from "./helpers/max";
-import { mean } from "./helpers/mean";
-import { median } from "./helpers/median";
-import { deviation } from "./helpers/deviation";
-import { quantile } from "./method-quantile";
-import { jenks } from "./method-jenks";
-import { equal } from "./method-equal";
-import { q6 } from "./method-q6";
+import { min } from "./helpers/min.js";
+import { max } from "./helpers/max.js";
+import { mean } from "./helpers/mean.js";
+import { median } from "./helpers/median.js";
+import { deviation } from "./helpers/deviation.js";
+import { quantile } from "./method-quantile.js";
+import { jenks } from "./method-jenks.js";
+import { equal } from "./method-equal.js";
+import { q6 } from "./method-q6.js";
 import { s5 } from "./method-s5.js";
-import { msd } from "./method-msd";
-import { geometricProgression } from "./method-geometric-progression";
-import { headtail } from "./method-headtail";
-import { pretty } from "./method-pretty";
-import { arithmeticProgression } from './method-arithmetic-progression';
-import { nestedMeans } from './method-nested-means';
-import { ckmeans } from './method-ckmeans';
-import { validateIntervalClosure, validatePrecisionParameter } from './helpers/parameter-validation';
-import { filterConvert } from './helpers/filter';
+import { msd } from "./method-msd.js";
+import { geometricProgression } from "./method-geometric-progression.js";
+import { headtail } from "./method-headtail.js";
+import { pretty } from "./method-pretty.js";
+import { arithmeticProgression } from './method-arithmetic-progression.js';
+import { nestedMeans } from './method-nested-means.js';
+import { ckmeans } from './method-ckmeans.js';
+import { validateIntervalClosure, validatePrecisionParameter } from './helpers/parameter-validation.js';
+import { filterConvert } from './helpers/filter.js';
 
 class AbstractClassifier {
   constructor(values, precision, intervalClosure='right') {

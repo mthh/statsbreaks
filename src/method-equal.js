@@ -1,9 +1,9 @@
-import { isNumber } from "./helpers/is-number";
-import { roundarray } from "./helpers/rounding";
-import { min } from "./helpers/min";
-import { max } from "./helpers/max";
-import {validateNbParameter, validatePrecisionParameter} from './helpers/parameter-validation';
-import { TooFewValuesError } from "./errors";
+import { isNumber } from "./helpers/is-number.js";
+import { roundarray } from "./helpers/rounding.js";
+import { min } from "./helpers/min.js";
+import { max } from "./helpers/max.js";
+import {validateNbParameter, validatePrecisionParameter} from './helpers/parameter-validation.js';
+import { TooFewValuesError } from "./errors.js";
 
 /**
  * Equal method

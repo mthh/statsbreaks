@@ -1,4 +1,4 @@
-import { isNumber } from "./is-number";
+import { isNumber } from "./is-number.js";
 
 /**
  * Takes an array of unknown data, filter out non-numeric values, and convert the rest to numbers.

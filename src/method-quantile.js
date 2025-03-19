@@ -1,8 +1,8 @@
-import { isNumber } from "./helpers/is-number";
-import { roundarray } from "./helpers/rounding";
-import { quantil } from "./helpers/quantile";
-import { TooFewValuesError } from "./errors";
-import {validateNbParameter, validatePrecisionParameter} from './helpers/parameter-validation';
+import { isNumber } from "./helpers/is-number.js";
+import { roundarray } from "./helpers/rounding.js";
+import { quantil } from "./helpers/quantile.js";
+import { TooFewValuesError } from "./errors.js";
+import {validateNbParameter, validatePrecisionParameter} from './helpers/parameter-validation.js';
 
 /**
  * Classification by quantiles

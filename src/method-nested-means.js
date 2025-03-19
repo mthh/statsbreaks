@@ -1,10 +1,10 @@
-import { InvalidNumberOfClassesError, TooFewValuesError } from './errors';
-import { isNumber } from './helpers/is-number';
-import { max } from "./helpers/max";
-import { mean } from "./helpers/mean";
-import { min } from "./helpers/min";
-import { validateNbParameter, validatePrecisionParameter } from './helpers/parameter-validation';
-import { roundarray } from './helpers/rounding';
+import { InvalidNumberOfClassesError, TooFewValuesError } from './errors.js';
+import { isNumber } from './helpers/is-number.js';
+import { max } from "./helpers/max.js";
+import { mean } from "./helpers/mean.js";
+import { min } from "./helpers/min.js";
+import { validateNbParameter, validatePrecisionParameter } from './helpers/parameter-validation.js';
+import { roundarray } from './helpers/rounding.js';
 
 function isPowerOfTwo(n) {
   return n && n !== 0 && (n & (n - 1)) === 0;

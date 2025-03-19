@@ -1,15 +1,15 @@
 export { breaks } from "./breaks.js";
-export { q6 } from "./method-q6";
-export { quantile } from "./method-quantile";
-export { equal } from "./method-equal";
+export { q6 } from "./method-q6.js";
+export { quantile } from "./method-quantile.js";
+export { equal } from "./method-equal.js";
 export { jenks } from "./method-jenks.js";
 export { headtail } from "./method-headtail.js";
 export { msd } from "./method-msd.js";
-export { geometricProgression } from "./method-geometric-progression";
-export { arithmeticProgression } from "./method-arithmetic-progression";
-export { pretty } from "./method-pretty";
-export { nestedMeans } from "./method-nested-means";
-export { ckmeans } from "./method-ckmeans";
+export { geometricProgression } from "./method-geometric-progression.js";
+export { arithmeticProgression } from "./method-arithmetic-progression.js";
+export { pretty } from "./method-pretty.js";
+export { nestedMeans } from "./method-nested-means.js";
+export { ckmeans } from "./method-ckmeans.js";
 export {
   InvalidNumberOfClassesError,
   InvalidPrecisionError,
@@ -32,4 +32,4 @@ export {
   QuantileClassifier,
   Q6Classifier,
   S5Classifier,
-} from "./classifier";
+} from "./classifier.js";

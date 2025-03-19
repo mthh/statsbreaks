@@ -1,11 +1,11 @@
-import { isNumber } from "./helpers/is-number";
-import { roundarray } from "./helpers/rounding";
-import { TooFewValuesError } from './errors';
-import { validatePrecisionParameter } from './helpers/parameter-validation';
-import { min } from './helpers/min';
-import { max } from './helpers/max';
-import { mean } from './helpers/mean';
-import { deviation } from './helpers/deviation';
+import { isNumber } from "./helpers/is-number.js";
+import { roundarray } from "./helpers/rounding.js";
+import { TooFewValuesError } from './errors.js';
+import { validatePrecisionParameter } from './helpers/parameter-validation.js';
+import { min } from './helpers/min.js';
+import { max } from './helpers/max.js';
+import { mean } from './helpers/mean.js';
+import { deviation } from './helpers/deviation.js';
 
 /**
  * S5 method

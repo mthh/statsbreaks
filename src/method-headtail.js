@@ -1,9 +1,9 @@
-import { isNumber } from "./helpers/is-number";
-import { roundarray } from "./helpers/rounding";
-import { min } from "./helpers/min";
-import { max } from "./helpers/max";
-import { mean } from "./helpers/mean";
-import {validateNbParameter, validatePrecisionParameter} from './helpers/parameter-validation';
+import { isNumber } from "./helpers/is-number.js";
+import { roundarray } from "./helpers/rounding.js";
+import { min } from "./helpers/min.js";
+import { max } from "./helpers/max.js";
+import { mean } from "./helpers/mean.js";
+import {validateNbParameter, validatePrecisionParameter} from './helpers/parameter-validation.js';
 
 /**
  * Head/tail algorithm v1.0 based on Jiang (2019).

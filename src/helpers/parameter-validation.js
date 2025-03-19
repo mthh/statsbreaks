@@ -1,5 +1,5 @@
-import { InvalidNumberOfClassesError, InvalidPrecisionError } from '../errors';
-import { isNumber } from './is-number';
+import { InvalidNumberOfClassesError, InvalidPrecisionError } from '../errors.js';
+import { isNumber } from './is-number.js';
 
 /**
  * Validate the 'nb' parameter and return it if it is valid

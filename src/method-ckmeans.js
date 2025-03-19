@@ -1,7 +1,7 @@
-import { isNumber } from './helpers/is-number';
-import { validateNbParameter, validatePrecisionParameter } from './helpers/parameter-validation';
-import { TooFewValuesError } from './errors';
-import { roundarray } from './helpers/rounding';
+import { isNumber } from './helpers/is-number.js';
+import { validateNbParameter, validatePrecisionParameter } from './helpers/parameter-validation.js';
+import { TooFewValuesError } from './errors.js';
+import { roundarray } from './helpers/rounding.js';
 
 /*
  * This segment of code has been adapted from "simple-statistics" under the ISC license.
