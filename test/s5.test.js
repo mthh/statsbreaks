@@ -1,5 +1,5 @@
-const test = require("tap").test;
-const statsbreaks = require("../dist/index.min.js");
+import tap from 'tap';
+import * as statsbreaks from '../src/index.js';
 
 const X = [
   561.3375698527462,
@@ -1104,7 +1104,7 @@ const X = [
   400.4387935716908
 ];
 
-test("s5", function (t) {
+tap.test("s5", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const breaks = statsbreaks.breaks(X, { method: 's5' });
     t.same(breaks, [172.68, 404.14, 452.37, 548.82, 597.04, 823.82]);
@@ -1120,7 +1120,7 @@ test("s5", function (t) {
   t.end();
 });
 
-test("S5Classifier", function (t) {
+tap.test("S5Classifier", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const d = new statsbreaks.S5Classifier(X);
     const breaks = d.classify();

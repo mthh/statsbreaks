@@ -1,8 +1,8 @@
-const test = require("tap").test;
-const X = require("./test-data.js");
-const statsbreaks = require("../dist/index.min.js");
+import tap from 'tap';
+import X from './test-data.js';
+import * as statsbreaks from '../src/index.js';
 
-test("nestedmeans", function (t) {
+tap.test("nestedmeans", function (t) {
   t.throws(function() {
       const breaks = statsbreaks.breaks([1, 2, 3], { method: 'nestedmeans', nb: 8 });
     },
@@ -20,7 +20,7 @@ test("nestedmeans", function (t) {
   t.end();
 });
 
-test("NestedMeansClassifier", function (t) {
+tap.test("NestedMeansClassifier", function (t) {
   t.throws(function() {
       const d = new statsbreaks.NestedMeansClassifier([1, 2, 3]);
       const breaks = d.classify(8);

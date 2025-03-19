@@ -1,6 +1,6 @@
-const test = require("tap").test;
-const statsbreaks = require("../dist/index.min.js");
-const X = require('./test-data');
+import tap from 'tap';
+import X from './test-data.js';
+import * as statsbreaks from '../src/index.js';
 
 const InvalidPrecisionError = statsbreaks.InvalidPrecisionError;
 
@@ -19,7 +19,7 @@ const allBreaksMethods = [
 
 // Run the tests for each method
 allBreaksMethods.forEach(function(method) {
-  test(`The 'precision' parameter, `, function (t) {
+  tap.test(`The 'precision' parameter, `, function (t) {
     // Test with a negative integer
     t.throws(function() {
         const breaks = statsbreaks.breaks(X, { method, nb: 4, precision: -1 });

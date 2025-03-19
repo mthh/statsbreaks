@@ -1,6 +1,6 @@
-const test = require("tap").test;
-const statsbreaks = require("../dist/index.min.js");
-const X2 = require("./test-data.js");
+import tap from 'tap';
+import * as statsbreaks from '../src/index.js';
+import X2 from './test-data.js';
 
 // This reference dataset is coming from https://github.com/urschrei/ckmeans/blob/main/src/lib.rs
 const X = [
@@ -256,7 +256,7 @@ const X = [
   1.8229938030274273,
 ];
 
-test("ckmeans", function (t) {
+tap.test("ckmeans", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const breaks = statsbreaks.breaks(X, { method: 'ckmeans', nb: 3, precision: 2 });
     // Breaks values are coming from https://github.com/urschrei/ckmeans/blob/main/src/lib.rs
@@ -267,7 +267,7 @@ test("ckmeans", function (t) {
   t.end();
 });
 
-test("CkmeansClassifier", function (t) {
+tap.test("CkmeansClassifier", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const d = new statsbreaks.CkmeansClassifier(X);
     const breaks = d.classify(3);
@@ -279,7 +279,7 @@ test("CkmeansClassifier", function (t) {
   t.end();
 });
 
-test('CkmeansClassifier', function (t) {
+tap.test('CkmeansClassifier', function (t) {
   t.test('should return same classification as jenks for the test data', function (t) {
     const dj = new statsbreaks.JenksClassifier(X2);
     const breaksJenks = dj.classify(5);

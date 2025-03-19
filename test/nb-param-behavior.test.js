@@ -1,6 +1,6 @@
-const test = require("tap").test;
-const statsbreaks = require("../dist/index.min.js");
-const X = require('./test-data');
+import tap from 'tap';
+import X from './test-data.js';
+import * as statsbreaks from '../src/index.js';
 
 const InvalidNumberOfClassesError = statsbreaks.InvalidNumberOfClassesError;
 
@@ -19,7 +19,7 @@ const methodThatUseNbParameter = [
 
 // Run the tests for each method
 methodThatUseNbParameter.forEach(function(method) {
-  test(`The 'nb' parameter, `, function (t) {
+  tap.test(`The 'nb' parameter, `, function (t) {
     // Test with positive integer, inferior to two
     t.throws(function() {
         const breaks = statsbreaks.breaks([1, 2, 3, 4, 5, 6, 7, 8], { method, nb: 1 });

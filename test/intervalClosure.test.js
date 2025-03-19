@@ -1,8 +1,9 @@
-const test = require("tap").test;
-const statsbreaks = require("../dist/index.min.js");
+import tap from 'tap';
+import * as statsbreaks from '../src/index.js';
+
 const X = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25];
 
-test('Classifier with right closed intervals', function (t) {
+tap.test('Classifier with right closed intervals', function (t) {
   t.test('should return correct getClass / countByClass / splitByClass values for the test data', function (t) {
     const d0 = new statsbreaks.CustomBreaksClassifier(
       X, // values
@@ -37,7 +38,7 @@ test('Classifier with right closed intervals', function (t) {
   t.end();
 });
 
-test('Classifier with left closed intervals', function (t) {
+tap.test('Classifier with left closed intervals', function (t) {
   t.test('should return correct getClass / countByClass / splitByClass values for the test data', function (t) {
     const d0 = new statsbreaks.CustomBreaksClassifier(
       X, // values

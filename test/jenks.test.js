@@ -1,8 +1,8 @@
-const test = require("tap").test;
-const X = require("./test-data.js");
-const statsbreaks = require("../dist/index.min.js");
+import tap from 'tap';
+import X from './test-data.js';
+import * as statsbreaks from '../src/index.js';
 
-test("jenks", function (t) {
+tap.test("jenks", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const breaks = statsbreaks.breaks(X, { method: 'jenks', nb: 5 });
     // t.same(breaks, [0.13, 75.29, 192.05, 370.50, 722.85, 4111.45]);
@@ -19,7 +19,7 @@ test("jenks", function (t) {
   t.end();
 });
 
-test("JenksClassifier", function (t) {
+tap.test("JenksClassifier", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const d = new statsbreaks.JenksClassifier(X);
     const breaks = d.classify(5);

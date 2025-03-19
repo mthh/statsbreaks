@@ -1,8 +1,8 @@
-const test = require("tap").test;
-const X = require("./test-data.js");
-const statsbreaks = require("../dist/index.min.js");
+import tap from 'tap';
+import X from './test-data.js';
+import * as statsbreaks from '../src/index.js';
 
-test("quantile", function (t) {
+tap.test("quantile", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const breaks = statsbreaks.breaks(X, { method: 'quantile', nb: 5 });
     t.same(breaks, [0.13, 1.46, 5.80, 13.28, 54.62, 4111.45]);
@@ -18,7 +18,7 @@ test("quantile", function (t) {
   t.end();
 });
 
-test("QuantileClassifier", function (t) {
+tap.test("QuantileClassifier", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const d = new statsbreaks.QuantileClassifier(X);
     const breaks = d.classify(5);

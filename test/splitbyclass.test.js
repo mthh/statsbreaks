@@ -1,12 +1,13 @@
-const test = require("tap").test;
-const statsbreaks = require("../dist/index.min.js");
+import tap from 'tap';
+import * as statsbreaks from '../src/index.js';
+
 const X = [10, 15, 20, 30, 40, 50, 60, 70, 80, 90];
 
 // We test the splitByClass method with the CustomBreaksClassifier
 // because this method is common to all classifiers
 // and does not depend on the method used to classify
 // the input values.
-test("Classifiers", function (t) {
+tap.test("Classifiers", function (t) {
   t.test('should splitByClass correctly with only one class', function (t) {
     const d1 = new statsbreaks.CustomBreaksClassifier(
       X, // values

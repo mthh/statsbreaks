@@ -1,8 +1,8 @@
-const test = require("tap").test;
-const X = require("./test-data.js");
-const statsbreaks = require("../dist/index.min.js");
+import tap from 'tap';
+import X from './test-data.js';
+import * as statsbreaks from '../src/index.js';
 
-test("CustomBreaksClassifier", function (t) {
+tap.test("CustomBreaksClassifier", function (t) {
   t.test('should return correct count by class for the test data', function (t) {
     const d = new statsbreaks.CustomBreaksClassifier(X);
     d.classify([0, 22, 674, 4112]);

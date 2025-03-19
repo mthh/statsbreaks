@@ -1,6 +1,6 @@
-const test = require("tap").test;
-const statsbreaks = require("../dist/index.min.js");
-const X = require('./test-data');
+import tap from 'tap';
+import X from './test-data.js';
+import * as statsbreaks from '../src/index.js';
 
 const methods = [
   'equal',
@@ -17,7 +17,7 @@ const methods = [
 
 // Run the tests for each method
 methods.forEach(function(method) {
-  test(`The 'minmax' parameter, `, function (t) {
+  tap.test(`The 'minmax' parameter, `, function (t) {
     t.test('should always return an array with 2 fewer elements than if not used',
       function (t) {
         const b1 = statsbreaks.breaks(X, { method, minmax: false });

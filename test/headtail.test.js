@@ -1,8 +1,8 @@
-const test = require("tap").test;
-const X = require("./test-data.js");
-const statsbreaks = require("../dist/index.min.js");
+import tap from 'tap';
+import X from './test-data.js';
+import * as statsbreaks from '../src/index.js';
 
-test("headtail", function (t) {
+tap.test("headtail", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const breaks = statsbreaks.breaks(X, { method: 'headtail', nb: 3 });
     t.same(breaks, [0.13, 125.93, 811.26, 4111.45]);
@@ -12,7 +12,7 @@ test("headtail", function (t) {
   t.end();
 });
 
-test("HeadtailClassifier", function (t) {
+tap.test("HeadtailClassifier", function (t) {
   t.test('should return correct breaks for the test data', function (t) {
     const d = new statsbreaks.HeadTailClassifier(X);
     const breaks = d.classify(3);
