@@ -4,6 +4,10 @@
 
 - Add `ckmeans` classification method (and `CkmeansClassifier` class). Fixes [#36](https://github.com/riatelab/statsbreaks/issues/36).
 
+- Add functionality to `Classifier` classes to choose the direction of the interval closure. 
+
+- Fix denominator when computing variance for msd classification.
+
 ## 1.0.6 (2023-10-19)
 
 - Fix unexpected behavior of `splitByClass` method  (fixes [#37](https://github.com/riatelab/statsbreaks/issues/37)).
