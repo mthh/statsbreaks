@@ -51,7 +51,6 @@
   },
   "scripts": {
     "build": "rollup --config",
-    "prepare": "npm run build",
     "test": "npm run build && tap test/*.test.js --jobs=4"
   }
 }
